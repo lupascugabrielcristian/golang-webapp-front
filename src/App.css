@@ -57,3 +57,7 @@
 .btn.disabled {
   color: rgb(170, 170, 170);
 }
+
+.data {
+  color: green;
+}

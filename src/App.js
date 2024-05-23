@@ -17,7 +17,8 @@ function App() {
       const response = await fetch('https://v68vdaivab.execute-api.eu-central-1.amazonaws.com/on_path_robotics_2', {
         method: 'POST',
         headers: {
-          'content-type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
         },
         body: JSON.stringify(body),
       });
@@ -51,7 +52,7 @@ function App() {
         </p>
       </header>
       <LambdaButton></LambdaButton>
-      <p>{data}</p>
+      <p className='data'>{data}</p>
     </div>
   );
 }
