@@ -14,7 +14,7 @@ function App() {
     };
 
     try {
-      const response = await fetch('https://v68vdaivab.execute-api.eu-central-1.amazonaws.com/on_path_robotics_2', {
+      const response = await fetch('https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com/prod/robots', {
         method: 'POST',
         headers: {
           "Access-Control-Allow-Origin": "*",
