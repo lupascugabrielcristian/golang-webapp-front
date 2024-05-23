@@ -1,44 +1,67 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { post } from 'aws-amplify/api';
 
 
 function App() {
   const [data, setData] = useState('Press the button');
   const [error, setError] = useState(null);
 
-  const fetchData = async () =>  {
-    const body = {
-      firstName: 'cristi',
-      lastName: 'dani',
-    };
+  // const fetchData = async () =>  {
+  //   const body = {
+  //     firstName: 'cristi',
+  //     lastName: 'dani',
+  //   };
 
+  //   try {
+  //     const response = await fetch('https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com/prod/robots', {
+  //       method: 'POST',
+  //       headers: {
+  //       },
+  //       body: JSON.stringify(body),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error: Status ${response.status}`);
+  //     }
+  //     let postsData = await response.json();
+  //     setData(postsData);
+  //     setError(null);
+  //   } catch (err) {
+  //     setError(err.message);
+  //     setData(null);
+  //   } finally {
+
+  //   }
+  // };
+
+  async function postRobots() {
+      
     try {
-      const response = await fetch('https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com/prod/robots', {
-        method: 'POST',
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-        },
-        body: JSON.stringify(body),
+      const reqData = {firstName: 'cristi', lastName: 'dani',};
+      const restOperation = post({
+        apiName: 'ocn-path',
+        path: '/robots',
+        opetions: {
+          body: reqData
+        }
       });
-      if (!response.ok) {
-        throw new Error(`HTTP error: Status ${response.status}`);
-      }
-      let postsData = await response.json();
-      setData(postsData);
+      const response = await restOperation.response;
+      console.log('PUT call succeded');
+      setData(response);
       setError(null);
-    } catch (err) {
-      setError(err.message);
+    } catch (e) {
+      console.log(e);
+      console.log('PUT call failed');
       setData(null);
-    } finally {
-
+      setError('PUT call failed');
     }
-  };
+  }
+
 
   const LambdaButton = () => {
     const testLambdaFc = () => {
-      fetchData().then(response => setData(response));
+      postRobots();
     };
 
     return <div className='btn' role="button" tabIndex={0} onClick={testLambdaFc}>Test Lambda function</div>
