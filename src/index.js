@@ -5,6 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';
 
+const existingConfig = Amplify.getConfig();
+
+Amplify.configure({
+  ...existingConfig,
+  API: {
+    ...existingConfig.API,
+    REST: {
+      ...existingConfig.API?.REST,
+      'On Path Robotics 2': {
+        endpoint: 'https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com/prod',
+        region: 'eu-central-1',
+      }
+    }
+  }
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -16,14 +32,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-Amplify.configure({
-  API: {
-    endpoints: [
-      {
-        name: 'ocn-path',
-        endpoint: 'https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com'
-      }
-    ]
-  }
-})

@@ -40,9 +40,12 @@ function App() {
     try {
       const reqData = {firstName: 'cristi', lastName: 'dani',};
       const restOperation = post({
-        apiName: 'ocn-path',
+        apiName: 'On Path Robotics 2',
         path: '/robots',
-        opetions: {
+        options: {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded"
+          },
           body: reqData
         }
       });
