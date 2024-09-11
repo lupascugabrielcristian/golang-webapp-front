@@ -8,33 +8,6 @@ function App() {
   const [data, setData] = useState('Press the button');
   const [error, setError] = useState(null);
 
-  // const fetchData = async () =>  {
-  //   const body = {
-  //     firstName: 'cristi',
-  //     lastName: 'dani',
-  //   };
-
-  //   try {
-  //     const response = await fetch('https://qkb8myc9t1.execute-api.eu-central-1.amazonaws.com/prod/robots', {
-  //       method: 'POST',
-  //       headers: {
-  //       },
-  //       body: JSON.stringify(body),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error: Status ${response.status}`);
-  //     }
-  //     let postsData = await response.json();
-  //     setData(postsData);
-  //     setError(null);
-  //   } catch (err) {
-  //     setError(err.message);
-  //     setData(null);
-  //   } finally {
-
-  //   }
-  // };
-
   async function postRobots() {
       
     try {
@@ -60,7 +33,6 @@ function App() {
       setError('PUT call failed');
     }
   }
-
 
   const LambdaButton = () => {
     const testLambdaFc = () => {
